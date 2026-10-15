@@ -46,4 +46,4 @@ function ModeSelector() {
   );
 }
 
-export default ModeSelect
+export default ModeSelector
