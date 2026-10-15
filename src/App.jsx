@@ -1,8 +1,4 @@
-import Button from '@mui/material/Button'
-import { pink } from '@mui/material/colors'
-import HomeIcon from '@mui/icons-material/Home'
 import { useColorScheme} from '@mui/material/styles'
-import * as React from 'react'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
@@ -11,14 +7,14 @@ import Box from '@mui/material/Box'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeOutLinedIcon from '@mui/icons-material/DarkModeOutlined'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
+import Container from '@mui/material/Container'
 
 function ModeSelector() {
   const { mode, setMode } = useColorScheme()
 
   const handleChange = (event) => {
-    setMode(event.target.value)
-    console.log(selectedMode)
-    setMode(event.target.value)
+   const selectedMode = event.target.value
+   setMode(selectedMode)
   };
 
   return (
@@ -37,52 +33,51 @@ function ModeSelector() {
           <LightModeIcon fontSize="small" /> Light
         </MenuItem>
         <MenuItem value="dark">
-        <box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <DarkModeOutLinedIcon fontSize="small" /> Dark
-        </box>
+        </Box>
         </MenuItem>
         <MenuItem value="system">
-        <box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box  sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <SettingsBrightnessIcon fontSize="small"/> System
-        </box>
+        </Box>
         </MenuItem>
       </Select>
     </FormControl>
   );
 }
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme()
-  return (
-    <Button
-      onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light')
-      }}
-    >
-       {mode === 'light' ? 'Turn dark' : 'Turn light'}
-      </Button>
-    )
-}
-
 function App() {
   return (
-    <>
-    <ModeSelector />
-    <hr />
-    <ModeToggle />
-    <div>abinhb</div>
-
-    <Button variant="text">Text</Button>
-    <Button variant="contained">Contained</Button>
-    <Button variant="outlined">Outlined</Button>
-     <br />
-    <HomeIcon color="primary" />
-    <HomeIcon color="secondary" />
-    <HomeIcon color="success" />
-    <HomeIcon color="action" />
-    <HomeIcon color="disabled" />
-    <HomeIcon sx={{ color: pink[500] }} />
-    </>
+    <Container disableGutters maxWidth={false} sx={{ height: '100vh', backgroundColor: 'primary.main' }}>
+      <Box sx={{
+        backgroundColor: 'primary.light',
+        width: '100%',
+        height: (theme) => theme.trello.appbarheight,
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        <ModeSelector />
+      </Box>
+      <Box sx={{
+        backgroundColor: 'primary.dark',
+        width: '100%',
+        height: (theme) => theme.trello.boardbarheight,
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        Board bar
+      </Box>
+      <Box sx={{
+        backgroundColor: 'primary.main',
+        width: '100%',
+        height: (theme) => `calc(100% - ${theme.trello.appbarheight} - ${theme.trello.boardbarheight})`,
+        display: 'flex',
+        alignItems: 'center'
+      }}>
+         Board Content
+      </Box>
+    </Container>
   )
 }
 
