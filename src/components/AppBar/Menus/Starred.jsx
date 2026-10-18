@@ -24,7 +24,7 @@ function Starred() {
     return (
       <Box>
         <Button
-        id={buttonId-Starred}
+        id={buttonId}
         aria-controls={open ? menuId : undefined}
         aria-haspopup="true"
         aria-expanded={open}
@@ -34,13 +34,13 @@ function Starred() {
         Starred
       </Button>
       <Menu
-        id={menuId-Starred}
+        id={menuId}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         slotProps={{
           list: {
-            'aria-labelledby': buttonId-Starred
+            'aria-labelledby': buttonId
           },
         }}
       >

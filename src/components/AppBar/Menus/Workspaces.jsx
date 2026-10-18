@@ -28,7 +28,7 @@ function Workspaces() {
     return (
       <Box>
         <Button
-        id={buttonId-Workspaces}
+        id={buttonId}
         aria-controls={open ? menuId : undefined}
         aria-haspopup="true"
         aria-expanded={open}
@@ -38,13 +38,13 @@ function Workspaces() {
         Workspaces
       </Button>
       <Menu
-        id={menuId-Workspaces}
+        id={menuId}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         slotProps={{
           list: {
-            'aria-labelledby': buttonId-Workspaces
+            'aria-labelledby': buttonId
           },
         }}
       >

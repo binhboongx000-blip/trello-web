@@ -24,7 +24,7 @@ function templates() {
     return (
       <Box>
         <Button
-        id={buttonId-templates}
+        id={buttonId}
         aria-controls={open ? menuId : undefined}
         aria-haspopup="true"
         aria-expanded={open}
@@ -34,13 +34,13 @@ function templates() {
         Templates
       </Button>
       <Menu
-        id={menuId-templates}
+        id={menuId}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         slotProps={{
           list: {
-            'aria-labelledby': buttonId-templates
+            'aria-labelledby': buttonId
           },
         }}
       >
