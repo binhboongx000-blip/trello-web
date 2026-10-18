@@ -36,20 +36,20 @@ function Profiles() {
             aria-expanded={open}
             >
             <Avatar 
-            sx={{ width: 30, height: 32 }}
+            sx={{ width: 34, height: 34 }}
             alt=" Anh Binh"
-            src=""
+            src="https://lh3.googleusercontent.com/a/ACg8ocK7bFHqso5Cx-oIyxhZA5Zr9GGRPXx_fhj3TCtCuxM3wVvej0L1=s288-c-no"
         />
             </IconButton>
         </Tooltip>
       <Menu
-        id={menuId-Profiles}
+        id={menuId}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         slotProps={{
           list: {
-            'aria-labelledby': buttonId-Profiles
+            'aria-labelledby': buttonId
           },
         }}
       >
