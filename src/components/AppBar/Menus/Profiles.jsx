@@ -36,7 +36,7 @@ function Profiles() {
             aria-expanded={open}
             >
             <Avatar 
-            sx={{ width: 34, height: 34 }}
+            sx={{ width: 36, height: 36 }}
             alt=" Anh Binh"
             src="https://lh3.googleusercontent.com/a/ACg8ocK7bFHqso5Cx-oIyxhZA5Zr9GGRPXx_fhj3TCtCuxM3wVvej0L1=s288-c-no"
         />
