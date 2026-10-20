@@ -10,6 +10,8 @@ import AvatarGroup from '@mui/material/AvatarGroup'
 import Tooltip from '@mui/material/Tooltip'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import { capitalizeFirstLetter } from '~/utilis/fomatter'
+
 const menu_styles={
   color: 'white',
   bgcolor: 'transparent',
@@ -24,7 +26,7 @@ const menu_styles={
   }
 }
 
-function BoardBar() {
+function BoardBar({ board }) {
   return (
     <Box sx={{
         width: '100%',
@@ -42,13 +44,13 @@ function BoardBar() {
         <Chip
           sx={menu_styles}
           icon={<DashboardIcon />} 
-          label="Anh Binh MERN Stack Board"
+          label={board?.title}
           clickable 
           />
           <Chip
           sx={menu_styles}
           icon={<VpnLockIcon />} 
-          label="Public/Private Workspace"
+          label={ capitalizeFirstLetter(board?.type)}
           clickable 
           />
         <Chip
