@@ -4,7 +4,7 @@ import Column from './Column/Column'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
 
 
-function ListColumns() {
+function ListColumns( { columns }) {
   return (
     <Box sx={{  
           bgcolor: 'inherit',
@@ -15,14 +15,13 @@ function ListColumns() {
           overflowY: 'hidden',
           '&::-webkit-scrollbar': { height: '8px' },
           '&::-webkit-scrollbar-thumb': {
-            backgroundColor: '#aeb4c0',
-            borderRadius: '8px'
+          backgroundColor: '#aeb4c0',
+          borderRadius: '8px'
           },
           '&::-webkit-scrollbar-thumb:hover': { backgroundColor: '#dcdde1' }
         }}>
-      <Column />
-      <Column />
-      <Column />
+      {columns?.map(column => <Column key={column._id} column={column} />)}
+        
         {/* Box add new column */}
       <Box sx={{
         minWidth: '200px',
