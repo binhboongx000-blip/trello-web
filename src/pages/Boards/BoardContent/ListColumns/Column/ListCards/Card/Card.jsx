@@ -10,29 +10,27 @@ import Typography from '@mui/material/Typography'
 import {useSortable} from '@dnd-kit/sortable'
 import {CSS} from '@dnd-kit/utilities'
 
-function Card({card}) {
-  const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
-      useSortable({id: card._id, data: {...card}})
-    const dndKidCardStyles = {
-      // touchAction: 'none',
-      transform: CSS.Translate.toString(transform),
-      transition,
-      opacity: isDragging ? 0.5 : undefined,
-      border: isDragging ? '1px solid #2eecc71' : undefined
-     };
+function CardFace({ card, cardRef, style, attributes, listeners, isSelected = false, onSelect }) {
   const shouldShowCardAction = () => {
     return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
   }
   return (
     <MuiCard 
-      ref={setNodeRef} style={dndKidCardStyles} {...attributes} {...listeners}
+      ref={cardRef} style={style} {...attributes} {...listeners}
+      onClick={onSelect ? (event) => {
+        event.stopPropagation()
+        onSelect()
+      } : undefined}
       sx={{ 
         cursor: 'pointer',
         boxShadow: '0 1px 1px rgb(0, 0, 0, 0.2)',
+        outline: isSelected ? '2px solid #4c9aff' : '2px solid transparent',
+        outlineOffset: '-2px',
         overflow: 'unset',
+        display: card?.Fe_PlacehoderCard ? 'none' : 'block'
       }}>
         {card?.cover && 
-          <CardMedia sx={{ height: 140 }} image={card?.cover} />
+          <CardMedia sx={{ height: 140, pointerEvents: 'none' }} image={card?.cover} />
         }
         <CardContent sx={{ p:1.5, '&:last-child': { p: 1.5 } }}>
           <Typography>{card?.title}</Typography>
@@ -47,6 +45,33 @@ function Card({card}) {
 
     </MuiCard>
   )
+}
+
+function Card({ card, isSelected, onSelect }) {
+  const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
+    useSortable({id: card._id, data: {...card}})
+  const sortableStyle = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.35 : undefined,
+    touchAction: 'none'
+  }
+
+  return (
+    <CardFace
+      card={card}
+      cardRef={setNodeRef}
+      style={sortableStyle}
+      attributes={attributes}
+      listeners={listeners}
+      isSelected={isSelected}
+      onSelect={onSelect}
+    />
+  )
+}
+
+export function CardPreview({ card }) {
+  return <CardFace card={card} />
 }
 
 export default Card

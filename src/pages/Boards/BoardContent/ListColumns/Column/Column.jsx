@@ -22,7 +22,7 @@ import {useSortable} from '@dnd-kit/sortable'
 import {CSS} from '@dnd-kit/utilities'
 
 
-function Column( { column }) {
+function Column({ column, selectedItem, onSelectItem }) {
   const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
     useSortable({id: column._id, data: {...column}})
   const dndKidColumnStyle = {
@@ -43,14 +43,19 @@ function Column( { column }) {
     const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
   return (
       <div ref={setNodeRef} style={dndKidColumnStyle} {...attributes} >
-        <Box 
+        <Box
           {...listeners}
+          onClick={() => onSelectItem?.({ type: 'column', id: column._id })}
           sx={{  
             minWidth: '300px',
             maxWidth: '300px',
             bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643': '#ebecf0'),
             ml: 2,
             borderRadius: '6px',
+            outline: selectedItem?.type === 'column' && selectedItem.id === column._id
+              ? '2px solid #4c9aff'
+              : '2px solid transparent',
+            outlineOffset: '-2px',
             height:'fit-content',
             maxHeight: (theme) =>`calc(${theme.trello.boardcontentheight} - ${theme.spacing(5)})`
 
@@ -125,7 +130,11 @@ function Column( { column }) {
               </Box>
             </Box>
               {/* Box List card */}
-            <ListCards cards={orderedCards} />
+            <ListCards
+              cards={orderedCards}
+              selectedItem={selectedItem}
+              onSelectItem={onSelectItem}
+            />
 
             <Box sx={{
               height: (theme) => theme.trello.columnfooterheight,
