@@ -5,7 +5,7 @@ import NoteAddIcon from '@mui/icons-material/NoteAdd'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
 
 
-function ListColumns( { columns }) {
+function ListColumns({ columns, selectedItem, onSelectItem }) {
   return (
     <SortableContext items={columns?.map(c => c._id)} strategy={horizontalListSortingStrategy}>
     <Box sx={{  
@@ -22,7 +22,14 @@ function ListColumns( { columns }) {
           },
           '&::-webkit-scrollbar-thumb:hover': { backgroundColor: '#dcdde1' }
         }}>
-      {columns?.map(column => <Column key={column._id} column={column} />)}
+      {columns?.map(column => (
+        <Column
+          key={column._id}
+          column={column}
+          selectedItem={selectedItem}
+          onSelectItem={onSelectItem}
+        />
+      ))}
         
         {/* Box add new column */}
       <Box sx={{
