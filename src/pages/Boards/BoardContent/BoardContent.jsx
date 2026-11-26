@@ -1,9 +1,11 @@
 import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utilis/sorts'
-import { DndContext, pointerWithin, rectIntersection, useSensor, useSensors, MouseSensor, TouchSensor, DragOverlay } from '@dnd-kit/core'
+import { DndContext, pointerWithin, rectIntersection, useSensor, useSensors, DragOverlay } from '@dnd-kit/core'
 import { arrayMove} from '@dnd-kit/sortable'
 import { useEffect, useState } from 'react'
+
+import { MouseSensor, TouchSensor } from '~/customLibraries/DndKitSensors'
 
 import  Column from './ListColumns/Column/Column'
 import Card, { CardPreview } from './ListColumns/Column/ListCards/Card/Card'
